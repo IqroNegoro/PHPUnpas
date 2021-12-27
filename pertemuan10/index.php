@@ -3,6 +3,21 @@
 require "functions.php";
 $mahasiswa = query("SELECT * FROM mahasiswa");
 
+
+//mysqli fetch assoc mengembalikan jadi array assoc
+//row jadi index
+//array gabungan assoc dan row jadi keluar semua index ama key nya
+//object
+// $row = mysqli_fetch_row($result);
+// var_dump($row);
+// echo "<br>";
+
+// $assoc = mysqli_fetch_assoc($result);
+// var_dump($assoc);
+
+// echo "<br>";
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +29,6 @@ $mahasiswa = query("SELECT * FROM mahasiswa");
 </head>
 <body>
     <h1> Daftar Mahasiswa </h1>
-
     <a href="tambah.php"> Tambah Data </a>
     <br><br>
     <table border="1" cellpadding="10" cellspacing="0">
@@ -35,8 +49,8 @@ $mahasiswa = query("SELECT * FROM mahasiswa");
             <tr style="text-align: center;">
                 <td><?=$i?></td>
                 <td>
-                    <a href="">Ubah</a>
-                    <a href="">Hapus</a>
+                    <a href="ubah.php?id=<?= $x["id"]?>">Ubah</a>
+                    <a href="hapus.php?id=<?= $x["id"]?>">Hapus</a>
                 </td>
                 <td>
                     <img src="img/<?=$x["gambar"]?>" alt="" width="50">
