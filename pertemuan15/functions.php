@@ -92,4 +92,38 @@ function cari($data) {
     return query($sql);
 }
 
+function registrasi($data) {
+    global $connect;
+    $username = strtolower(stripslashes($data["username"]));
+    $password = mysqli_real_escape_string($connect, $data["password"]);
+    $password2 = mysqli_real_escape_string($connect, $data["password2"]);
+    
+    $sql = "SELECT username FROM users WHERE username = '$username'";
+    $result = mysqli_query($connect, $sql);
+    
+    if ($password !== $password2) {
+        echo "<script> 
+                alert('Konfirmasi pass salah!')
+            </script>";
+            return false;
+        } else {
+        if (mysqli_fetch_assoc($result)) {
+            echo "<script>
+                    alert('Username sudah ada!');
+                </script>";
+                return false;
+        }
+        $password = password_hash($password, PASSWORD_DEFAULT);
+        $sql = "INSERT INTO users VALUE ('', '$username', '$password')";
+        mysqli_query($connect, $sql);
+        
+        return mysqli_affected_rows($connect);
+    }
+
+    
+
+
+
+
+}
 ?>
