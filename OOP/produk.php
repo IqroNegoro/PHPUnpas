@@ -13,12 +13,15 @@ class Produk {
         $this->harga = $harga;
     }
 
-    public function sayHello() {
-        echo "Hewllo";
-    }
-
     public function getLabel() {
         return "$this->penulis, $this->penerbit";
+    }
+    
+}
+
+class CetakInfo {
+    public function cetak(Produk $produk) {
+        return "{$produk->judul} |{$produk->getLabel()} {(Rp. $produk->harga)}";
     }
 }
 
@@ -29,4 +32,7 @@ class Produk {
 // $produk2->judul = "Uncharted";
 $produk3 = new Produk("Naruto", "Masashi Kishimoto", "Shounen Jump", 30000);
 echo "Komik: " . $produk3->getLabel();
+echo "<br>";
+$info = new CetakInfo();
+echo $info->cetak($produk3);
 ?>
