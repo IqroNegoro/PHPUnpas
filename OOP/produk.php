@@ -1,14 +1,16 @@
 <?php 
 
 class Produk {
-    public $judul = "judul";
-    public $penulis = "penulis";
-    public $penerbit = "penerbit";
-    public $harga = 0;
+    public $judul;
+    public $penulis;
+    public $penerbit;
+    public $harga;
 
-    public function __construct()
-    {
-        
+    public function __construct($judul = "judul", $penulis = "penulis", $penerbit = "penerbit", $harga = 0) {
+        $this->judul = $judul;
+        $this->penulis = $penulis;
+        $this->penerbit = $penerbit;
+        $this->harga = $harga;
     }
 
     public function sayHello() {
@@ -25,10 +27,6 @@ class Produk {
 
 // $produk2 = new Produk();
 // $produk2->judul = "Uncharted";
-$produk3 = new Produk();
-$produk3->judul = "Naruto";
-$produk3->penulis = "Masashi Kishimoto";
-$produk3->penerbit = "Shounen Jump";
-$produk3->harga = 3000;
+$produk3 = new Produk("Naruto", "Masashi Kishimoto", "Shounen Jump", 30000);
 echo "Komik: " . $produk3->getLabel();
 ?>
