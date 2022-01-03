@@ -1,5 +1,19 @@
 <?php 
 session_start();
+if (isset($_COOKIE["id"]) && isset($_COOKIE["key"])) {
+    $id = $_COOKIE["id"];
+    $key = $_COOKIE["key"];
+
+    $sql = "SELECT username FROM user WHERE id = $id";
+    $result = mysqli_query($connect, $sql);
+    
+    $row = mysqli_fetch_assoc($result);
+
+    if ($key === hash('sha256', $row["username"])) {
+        $_SESSION["login"] = true;
+    }
+    
+}
 if (isset($_SESSION["login"])) {
     header("Location: index.php");
     exit;
@@ -15,6 +29,10 @@ if (isset($_POST["login"])) {
     if (mysqli_num_rows($result) === 1) {
         $row = mysqli_fetch_assoc($result);
         if (password_verify($password, $row["password"])) {
+            if (isset($_POST["remember"])) {
+                setcookie("id", $row["id"], time() + 60);
+                setcookie("key", hash('sha256', $row["username"]), time() + 60);
+            }
             $_SESSION["login"] = true;
             header("Location: index.php");
             exit;
@@ -46,6 +64,10 @@ if (isset($_POST["login"])) {
             <li>
                 <label for="username"> Username : </label>
                 <input type="text" id="username" name="username">
+            </li>
+            <li>
+                <label for="remember"> Remember Me </label>
+                <input type="checkbox" id="remember" name="remember">
             </li>
             <li>
                 <label for="password"> Password : </label>
