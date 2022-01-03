@@ -27,13 +27,14 @@ if (isset($_POST["cari"])) {
     <a href="tambah.php"> Tambah Data </a>
     <br><br>
     <form action="" method="POST">
-        <input type="text" name="keyword" size="30" autofocus placeholder="masukkan keyword" autocomplete="off">
-        <button type="submit" name="cari"> Cari </button>
+        <input type="text" id="keyword" name="keyword" size="30" autofocus placeholder="masukkan keyword" autocomplete="off">
+        <button type="submit" name="cari" id="cari"> Cari </button>
     </form>
     <br>
-    <table border="1" cellpadding="10" cellspacing="0">
-        <tr>
-            <th>No.</th>
+    <div id="container">
+        <table border="1" cellpadding="10" cellspacing="0">
+            <tr>
+                <th>No.</th>
             <th>Aksi</th>
             <th>Foto</th>
             <th>NRP</th>
@@ -41,11 +42,11 @@ if (isset($_POST["cari"])) {
             <th>Email</th>
             <th>Jurusan</th>
         </tr>
-
+        
         <?php 
         $i = 1;
         foreach ($mahasiswa as $x) :
-        ?>
+            ?>
             <tr style="text-align: center;">
                 <td><?=$i?></td>
                 <td>
@@ -63,5 +64,7 @@ if (isset($_POST["cari"])) {
             <?php $i++; ?>
         <?php endforeach ?>
     </table>
+</div>
+<script src="js/script.js"></script>
 </body>
 </html>
